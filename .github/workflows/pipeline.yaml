@@ -33,7 +33,7 @@ jobs:
       - name: Build Docker image
         run: |
           echo "Building Docker image..."
-          docker build -t keyurpatil06/hello-world-app:latest .
+          docker build -t amaaniscool/devops_exp7:latest .
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -44,24 +44,24 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           echo "Pushing Docker image..."
-          docker push keyurpatil06/hello-world-app:latest
+          docker push amaaniscool/devops_exp7:latest
 
       - name: Deploy to localhost
         run: |
           echo "Deploying to localhost..."
-          docker pull keyurpatil06/hello-world-app:latest
+          docker pull amaaniscool/devops_exp7:latest
           
           echo "Stopping old container (if exists)..."
-          docker stop hello-world-app-container || true
+          docker stop devops_exp7 || true
           
           echo "Removing old container..."
-          docker rm hello-world-app-container || true
+          docker rm devops_exp7 || true
           
           echo "Starting new container..."
           docker run -d \
-            --name hello-world-app-container \
+            --name devops_exp7 \
             -p 3000:3000 \
-            keyurpatil06/hello-world-app:latest
+            amaaniscool/devops_exp7:latest
 
           echo "Waiting for container to start..."
           sleep 5
@@ -70,12 +70,12 @@ jobs:
           docker ps
 
           echo "Container logs:"
-          docker logs hello-world-app-container
+          docker logs devops_exp7
 
       - name: Verify successful deployment
         run: |
           echo "Checking service..."
           curl -f http://localhost:3000 \
-            || (docker logs hello-world-app-container && exit 1)
+            || (docker logs devops_exp7 && exit 1)
 
           echo "Service is running successfully! 🎉"
