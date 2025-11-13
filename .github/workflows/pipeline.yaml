@@ -74,8 +74,7 @@ jobs:
 
       - name: Verify successful deployment
         run: |
-          echo "Checking service..."
-          curl -f http://localhost:3000 \
-            || (docker logs devops_exp7 && exit 1)
-
-          echo "Service is running successfully! 
+          echo 'Checking service...'
+          curl -sf http://localhost:3000 > /dev/null \
+            || (echo 'Service FAILED'; docker logs devops_exp7; exit 1)
+          echo 'Service is running successfully!'
