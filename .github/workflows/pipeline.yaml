@@ -78,4 +78,4 @@ jobs:
           curl -f http://localhost:3000 \
             || (docker logs devops_exp7 && exit 1)
 
-          echo "Service is running successfully! 🎉"
+          echo "Service is running successfully! 
